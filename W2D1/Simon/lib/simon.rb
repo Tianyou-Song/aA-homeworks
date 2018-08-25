@@ -6,6 +6,12 @@ class Simon
     Simon.new.play
   end
 
+  def initialize
+    @sequence_length = 1
+    @game_over = false
+    @seq = []
+  end
+
   def play
     until @game_over
       take_turn
@@ -20,12 +26,6 @@ class Simon
 
   attr_accessor :sequence_length, :game_over, :seq
 
-  def initialize
-    @sequence_length = 1
-    @game_over = false
-    @seq = []
-  end
-
   def take_turn
     show_sequence
     require_sequence
@@ -36,9 +36,10 @@ class Simon
   end
 
   def show_sequence
-    system("clear")
     add_random_color
     @seq.each do |color|
+      sleep(0.5)
+      system("clear")
       puts color
       sleep(1)
       system("clear")
