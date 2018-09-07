@@ -1,3 +1,5 @@
+require 'byebug'
+
 class SnackBox
   SNACK_BOX_DATA = {
     1 => {
@@ -109,12 +111,24 @@ class MetaCorgiSnacks
     @box_id = box_id
   end
 
-  def method_missing(name, *args)
-    # Your code goes here...
-  end
+  # def method_missing(name, *args)
+  #   info_method = "get_#{name}_info".to_sym
+  #   tastiness_method = "get_#{name}_tastiness".to_sym
+  #   info = @snack_box.send(info_method, @box_id)
+  #   tastiness = @snack_box.send(tastiness_method, @box_id)
+  #   result = "#{name}: #{info}: #{tastiness} "
+  #   tastiness > 30 ? "* #{result}" : result
+  # end
 
 
   def self.define_snack(name)
-    # Your code goes here...
+    define_method(name) do
+      info_method = "get_#{name}_info".to_sym
+      tastiness_method = "get_#{name}_tastiness".to_sym
+      info = @snack_box.send(info_method, @box_id)
+      tastiness = @snack_box.send(tastiness_method, @box_id)
+      result = "#{name}: #{info}: #{tastiness} "
+      tastiness > 30 ? "* #{result}" : result
+    end
   end
 end
