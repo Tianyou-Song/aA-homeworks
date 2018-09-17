@@ -110,3 +110,33 @@ label {
     display: block;
 }
 
+.hamburger-dropdown {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  nav ul {
+    display: none;
+  }
+
+  .hamburger-dropdown {
+    display: block;
+  }
+
+  .hamburger-dropdown > li {
+    background: url(./hamburger.png);
+    background-size: 50px, 50px;
+    position: relative;
+  }
+
+  .hamburger-dropdown ul {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    flex-direction: column;
+  }
+
+  .hamburger-dropdown:hover ul {
+    display: block;
+  }
+}
