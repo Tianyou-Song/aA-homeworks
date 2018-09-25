@@ -5,7 +5,7 @@ function View($el) {
   this.setupEasel();
 }
 
-window._randomColorString = function(){
+window._randomColorString = function () {
   return '#' + Math.random().toString(16).substr(-6);
 };
 
@@ -15,7 +15,7 @@ View.prototype.exercise0 = function () {
   //just a list of dots
 
   //this one completed as an example :) no additional code necessary
-  $('li').removeClass("square");
+  $('li').removeClass('square');
 };
 
 View.prototype.exercise1 = function () {
@@ -23,6 +23,7 @@ View.prototype.exercise1 = function () {
   //Result: Every square should turn orange (we already have a CSS rule)
 
   //your code here!
+  $('li').addClass('orange');
 };
 
 View.prototype.exercise2 = function () {
@@ -30,6 +31,7 @@ View.prototype.exercise2 = function () {
   //Result: Every square vanishes
 
   //your code here!
+  $('li').remove();
 };
 
 View.prototype.exercise3 = function () {
@@ -37,6 +39,7 @@ View.prototype.exercise3 = function () {
   //Result: An <h1> with the text 'i love jquery' appears under the grid.
 
   //your code here!
+  $('#ease1').append($('<h1>').text('i love jquery'));
 };
 
 View.prototype.exercise4 = function () {
@@ -44,6 +47,7 @@ View.prototype.exercise4 = function () {
   //Result: Your name appears in every other square.
 
   //your code here!
+  $('.square:nth-child(even)').text('Tim');
 };
 
 View.prototype.exercise5 = function () {
@@ -55,6 +59,10 @@ View.prototype.exercise5 = function () {
   //  'data-pos' of every square
 
   //your code here!
+  $('.square').on('click', square => {
+    const $square = $(square.currentTarget);
+    alert($square.attr('data-pos'));
+  });
 };
 
 View.prototype.exercise6 = function () {
@@ -67,7 +75,7 @@ View.prototype.exercise6 = function () {
   //your code here!
 };
 
-View.prototype.exercise7 = function(){
+View.prototype.exercise7 = function () {
   //Challenge: When your mouse goes over a square, console log its color.
   //Result: When the mouse goes over a square its color should appear in the
   //console. The color won't be the color's name, but its rbg value.
@@ -77,35 +85,34 @@ View.prototype.exercise7 = function(){
   //your code here!
 };
 
-
-
-View.prototype.setupEasel = function() {
+View.prototype.setupEasel = function () {
   const $addRowButton = $('<button>').html('Add a row');
   this.$el.append($addRowButton);
-  $addRowButton.on("click", this.addRow.bind(this));
+  $addRowButton.on('click', this.addRow.bind(this));
 
-  for(let j = 0; j <= 7; j++){
-    const $button = $("<button>").html("Exercise " + j);
-    $button.on("click", this["exercise" + j]);
+  for (let j = 0; j <= 7; j++) {
+    const $button = $('<button>').html('Exercise ' + j);
+    $button.on('click', this['exercise' + j]);
     this.$el.append($button);
   }
 
-  for(let i = 0; i < 20; i ++) {
+  for (let i = 0; i < 20; i++) {
     this.addRow();
   }
 };
 
-View.prototype.addRow = function() {
-  const rowIdx = this.$el.find(".row").length;
-  const $row = $("<ul>").addClass("row").addClass("group");
-  for(let colIdx = 0; colIdx < 20; colIdx++) {
-    const $square = $("<li>").addClass("square").attr("data-pos", [rowIdx, colIdx]);
-    $square.on("mouseenter", (e) => {
+View.prototype.addRow = function () {
+  const rowIdx = this.$el.find('.row').length;
+  const $row = $('<ul>').addClass('row').addClass('group');
+  for (let colIdx = 0; colIdx < 20; colIdx++) {
+    const $square = $('<li>').addClass('square').attr('data-pos', [rowIdx, colIdx]);
+    $square.on('mouseenter', (e) => {
       const $square = $(e.currentTarget);
-      $square.css("background-color", window._randomColorString());
+      $square.css('background-color', window._randomColorString());
     });
     $row.append($square);
   }
+
   this.$el.append($row);
 };
 
