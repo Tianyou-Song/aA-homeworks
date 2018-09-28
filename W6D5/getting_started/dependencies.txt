@@ -1,0 +1,1 @@
+npm install webpack webpack-cli @babel/core @babel/preset-env react babel-loader react react-dom
