@@ -10,7 +10,7 @@ class Widget extends React.Component {
 
     // require this component to re-render whenever the store's state changes
     this.props.store.subscribe(this.forceUpdate);
-    this.cities = ["San Francisco", "Seattle", "New York", "Austin", "Remote"];
+    this.cities = ['San Francisco', 'Seattle', 'New York', 'Austin', 'Remote'];
     this.selectLocation = selectLocation.bind(this);
   }
 
@@ -19,12 +19,12 @@ class Widget extends React.Component {
       crossDomain: true,
       dataType: 'jsonp',
       url: `https://jobs.github.com/positions.json?location=${city}&markdown=true`,
-      type: "GET",
+      type: 'GET',
       success: function(resp) {
         // tell the store to update with the new location and jobs;
         // use the action creator 'selectLocation' to build the object to
         // be dispatched
-        this.props.store.dispatch(this.selectLocation(city, resp))
+        this.props.store.dispatch(this.selectLocation(city, resp));
 
       }.bind(this)
     });
@@ -34,11 +34,11 @@ class Widget extends React.Component {
 
     // get the store's current state and deconstruct it into 'jobs'
     // and 'city' variables
-    const { city, jobs } = this.props.store.getState();
+    const {city, jobs} = this.props.store.getState();
     const cityOptions = this.cities.map(city => (
-        <button onClick={ () => { this.fetchJobListings(city) }}
+        <button onClick={ () => { this.fetchJobListings(city); }}
              key={city}
-             className="job-option">
+             className='job-option'>
           {city}
         </button>
       )
@@ -60,19 +60,18 @@ class Widget extends React.Component {
         <h1>Github Job Listings</h1>
         <h3>City: {city}</h3>
 
-        <div className="location-selector">
+        <div className='location-selector'>
           Location:
           {cityOptions}
         </div>
-        
+
         <h3>{jobListings.length} Job Listings</h3>
-        <ol className="listings-list">
+        <ol className='listings-list'>
             {jobListings}
         </ol>
       </div>
     );
   }
 };
-
 
 export default Widget;

@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Job = ({title, company, type, location, description, info}) => {
-  let color = "red";
-  if (type === "Full Time") {
-    color = "green";
+  let color = 'red';
+  if (type === 'Full Time') {
+    color = 'green';
   }
 
   return (
