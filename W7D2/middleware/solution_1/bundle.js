@@ -1335,7 +1335,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(addLoggingToDispatch));
+  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(addLoggingToDispatch, addSwag));
   store.subscribe(function () {
     localStorage.state = JSON.stringify(store.getState());
   });
@@ -1349,6 +1349,15 @@ var addLoggingToDispatch = function addLoggingToDispatch(store) {
       console.log('action: ', action);
       next(action);
       console.log('new state: ', store.getState());
+    };
+  };
+};
+
+var addSwag = function addSwag(store) {
+  return function (next) {
+    return function (action) {
+      console.log('swag');
+      next(action);
     };
   };
 };
